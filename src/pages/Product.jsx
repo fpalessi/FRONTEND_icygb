@@ -7,8 +7,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
 import { addProduct } from "../features/cart/cartSlice";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+
 import axios from "axios";
 
 const Container = styled.div``;
@@ -150,8 +149,6 @@ const Product = () => {
 
   const dispatch = useDispatch();
 
-  const addedToCartMsg = () => toast("Producto añadido al carrito!");
-
   useEffect(() => {
     const getSingleProduct = async () => {
       try {
@@ -230,18 +227,6 @@ const Product = () => {
       </div>
       <Newsletter />
       <Footer />
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
     </Container>
   );
 };

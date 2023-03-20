@@ -8,8 +8,6 @@ import Banner from "../components/Banner";
 
 import backgroundImg from "../assets/log-reg-img.jpeg";
 
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import useAuth from "../hooks/useAuth";
 import axios from "axios";
 
@@ -86,15 +84,15 @@ const Register = () => {
 
   const navigate = useNavigate();
 
-  const successfullyRegistered = () => toast("Te has registrado correctamente");
+  // const successfullyRegistered = () => toast("Te has registrado correctamente");
 
-  const delayRedirection = () => {
-    timeout = setTimeout(redirect, 4000);
-  };
+  // const delayRedirection = () => {
+  //   timeout = setTimeout(redirect, 4000);
+  // };
 
-  const redirect = () => {
-    navigate("/login");
-  };
+  // const redirect = () => {
+  //   navigate("/login");
+  // };
 
   useEffect(() => {
     if (user) {
@@ -246,7 +244,6 @@ const Register = () => {
             </Button>
           </Form>
         </Wrapper>
-        <ToastContainer autoClose={3000} />
       </Container>
     </>
   );

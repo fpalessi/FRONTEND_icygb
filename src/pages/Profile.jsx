@@ -261,16 +261,16 @@ const Profile = () => {
               {orders?.length > 0 ? (
                 orders?.map((order) => (
                   <div
-                    key={order._id}
+                    key={order?._id}
                     style={{ margin: "10px", padding: "5px" }}
                   >
-                    <h4>Número de pedido: #{order._id}</h4>
+                    <h4>Número de pedido: #{order?._id}</h4>
                     <p>
                       Fecha de pedido:{" "}
-                      {format(new Date(order.createdAt), "yyyy-MM-dd")}
+                      {format(new Date(order?.createdAt), "yyyy-MM-dd")}
                     </p>
-                    <p>Pares de zapatillas: {order.quantity}</p>
-                    <p>Coste total: {order.total}€</p>
+                    <p>Pares de zapatillas: {order?.quantity}</p>
+                    <p>Coste total: {order?.total}€</p>
                     <p>Llegada: 2 a 5 días</p>
                     <p>Envío gratuito</p>
                   </div>
