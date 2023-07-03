@@ -16,8 +16,16 @@ import axios from "axios";
 const Container = styled.div`
   width: 100vw;
   height: 90.39vh;
-  background: url(${backgroundImg}) center;
-  background-size: cover;
+  background-color: #e5e5f7;
+  opacity: 0.6;
+  background-size: 8px 8px;
+  background-image: repeating-linear-gradient(
+    45deg,
+    #bfbfbf 0,
+    #bfbfbf 0.8px,
+    #e5e5f7 0,
+    #e5e5f7 50%
+  );
   display: flex;
   align-items: center;
   justify-content: center;
@@ -33,6 +41,7 @@ const Wrapper = styled.div`
 `;
 const Title = styled.h1`
   font-size: 24px;
+  color: black;
   font-weight: 500;
   display: flex;
   justify-content: center;

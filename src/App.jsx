@@ -12,6 +12,7 @@ import Profile from "./pages/Profile";
 import useAuth from "./hooks/useAuth";
 import { UserContextProvider } from "./context/UserContext";
 import axios from "axios";
+import ScrollToTop from "./components/ScrollToTop";
 
 axios.defaults.withCredentials = true;
 
@@ -19,6 +20,7 @@ function App() {
   const { user } = useAuth();
   return (
     <UserContextProvider>
+      <ScrollToTop />
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route path="/profile" element={<Profile />} />
