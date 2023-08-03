@@ -4,6 +4,7 @@ import axios from "axios";
 import Product from "./Product";
 import styled from "styled-components";
 import { useEffect } from "react";
+import Spinner from "./Spinner";
 
 const Container = styled.div`
   padding: 20px;
@@ -23,11 +24,12 @@ const Title = styled.h2`
 
 const Products = ({ brand, filter, sort }) => {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
   const getProducts = async () => {
     try {
-      // fetching data from our backend
+      setLoading(true);
       const response = await axios.get(
         brand
           ? `${import.meta.env.VITE_BACKEND_URL}/api/products?brand=${brand}`
@@ -36,6 +38,8 @@ const Products = ({ brand, filter, sort }) => {
       setProducts(response.data);
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -76,13 +80,15 @@ const Products = ({ brand, filter, sort }) => {
         <Title>{brand ? null : "Últimas novedades"}</Title>
       </TitleContainer>
       <Container>
-        {brand
-          ? filteredProducts.map((item) => (
-              <Product item={item} key={item._id} />
-            ))
-          : products
-              .slice(0, 12)
-              .map((item) => <Product item={item} key={item._id} />)}
+        {loading ? (
+          <Spinner />
+        ) : brand ? (
+          filteredProducts.map((item) => <Product item={item} key={item._id} />)
+        ) : (
+          products
+            .slice(0, 12)
+            .map((item) => <Product item={item} key={item._id} />)
+        )}
       </Container>
     </>
   );

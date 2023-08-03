@@ -9,6 +9,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { addProduct } from "../features/cart/cartSlice";
 
 import axios from "axios";
+import Spinner from "../components/Spinner";
 
 const Container = styled.div``;
 
@@ -147,11 +148,14 @@ const Product = () => {
 
   const [size, setSize] = useState();
 
+  const [loading, setLoading] = useState(false);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     const getSingleProduct = async () => {
       try {
+        setLoading(true);
         const response = await axios.get(
           `${import.meta.env.VITE_BACKEND_URL}/api/products/find/${id}`
         );
@@ -159,6 +163,8 @@ const Product = () => {
         console.log(response.data);
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoading(false);
       }
     };
     getSingleProduct();
@@ -166,45 +172,49 @@ const Product = () => {
 
   const AddProductToCart = () => {
     dispatch(addProduct({ ...product, qty, size }));
-    addedToCartMsg();
   };
 
   return (
     <Container>
       <Navbar />
       <Banner />
-      <Wrapper>
-        <ImageContainer>
-          <Image src={product.img} />
-        </ImageContainer>
-        <InfoContainer>
-          <Title>{product.title}</Title>
-          <Description>{product.description}</Description>
-          <Price>{product.price} €</Price>
-          <FilterContainer>
-            <Filter>
-              <FilterTitle>Tallas disponibles:</FilterTitle>
-              <FilterSize onChange={(e) => setSize(e.target.value)}>
-                {product.size?.map((s) => (
-                  <FilterSizeOption key={s}>{s}</FilterSizeOption>
-                ))}
-              </FilterSize>
-            </Filter>
-          </FilterContainer>
+      {loading ? (
+        <Spinner />
+      ) : (
+        <Wrapper>
+          <ImageContainer>
+            <Image src={product.img} />
+          </ImageContainer>
+          <InfoContainer>
+            <Title>{product.title}</Title>
+            <Description>{product.description}</Description>
+            <Price>{product.price} €</Price>
+            <FilterContainer>
+              <Filter>
+                <FilterTitle>Tallas disponibles:</FilterTitle>
+                <FilterSize onChange={(e) => setSize(e.target.value)}>
+                  {product.size?.map((s) => (
+                    <FilterSizeOption key={s}>{s}</FilterSizeOption>
+                  ))}
+                </FilterSize>
+              </Filter>
+            </FilterContainer>
 
-          <ButtonsContainer>
-            <StyledButton onClick={AddProductToCart}>
-              AÑADIR ZAPATILLA
-            </StyledButton>{" "}
-            <StyledButton onClick={() => navigate("/cart")}>
-              VER CARRITO
-            </StyledButton>
-            <StyledButton onClick={() => navigate(-1)}>
-              SEGUIR COMPRANDO
-            </StyledButton>{" "}
-          </ButtonsContainer>
-        </InfoContainer>
-      </Wrapper>{" "}
+            <ButtonsContainer>
+              <StyledButton onClick={AddProductToCart}>
+                AÑADIR ZAPATILLA
+              </StyledButton>{" "}
+              <StyledButton onClick={() => navigate("/cart")}>
+                VER CARRITO
+              </StyledButton>
+              <StyledButton onClick={() => navigate(-1)}>
+                SEGUIR COMPRANDO
+              </StyledButton>{" "}
+            </ButtonsContainer>
+          </InfoContainer>
+        </Wrapper>
+      )}
+
       <div
         style={{
           display: "flex",
