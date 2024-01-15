@@ -13,7 +13,7 @@ const Container = styled.div`
 `;
 
 const Banner = () => {
-  return <Container>Envío gratis hasta octubre de 2023</Container>;
+  return <Container>Envío gratis hasta 11/2024</Container>;
 };
 
 export default Banner;

@@ -99,6 +99,7 @@ const Info = styled.div`
   flex: 3;
 `;
 const Product = styled.div`
+  margin-top: 10px;
   display: flex;
   justify-content: space-between;
   @media only screen and (max-width: 794px) {
@@ -180,6 +181,8 @@ const Cart = () => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
+
+  console.log(cart.products);
 
   const successfulBuy = async () => {
     setTimeout(() => {

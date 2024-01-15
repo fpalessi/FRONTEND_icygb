@@ -6,8 +6,6 @@ import Navbar from "../components/Navbar";
 import Alert from "../components/Alert";
 import Banner from "../components/Banner";
 
-import backgroundImg from "../assets/log-reg-img.jpeg";
-
 import useAuth from "../hooks/useAuth";
 import axios from "axios";
 
@@ -92,15 +90,9 @@ const Register = () => {
 
   const navigate = useNavigate();
 
-  // const successfullyRegistered = () => toast("Te has registrado correctamente");
-
-  // const delayRedirection = () => {
-  //   timeout = setTimeout(redirect, 4000);
-  // };
-
-  // const redirect = () => {
-  //   navigate("/login");
-  // };
+  const redirect = () => {
+    navigate("/login");
+  };
 
   useEffect(() => {
     if (user) {
@@ -167,8 +159,7 @@ const Register = () => {
           address,
         }
       );
-      successfullyRegistered();
-      delayRedirection();
+      redirect();
     } catch (error) {
       setAlert({ msg: error.response.data.msg, error: true });
     }
